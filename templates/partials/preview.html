@@ -1,0 +1,13 @@
+<div class="card h-100 window-card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Imagen Cargada</h5>
+        <button class="btn btn-sm btn-outline-secondary toggle-window">−</button>
+    </div>
+    <div class="card-body text-center window-content">
+        {% if image_path %}
+        <img src="{{ url_for('static', filename='imagenes/' + image_path) }}" class="img-fluid" alt="Imagen cargada">
+        {% else %}
+        <p class="text-muted">No se ha cargado ninguna imagen aún.</p>
+        {% endif %}
+    </div>
+</div>

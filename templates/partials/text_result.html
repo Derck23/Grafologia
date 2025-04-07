@@ -1,0 +1,51 @@
+<div class="card window-card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Texto Reconocido</h5>
+        <button class="btn btn-sm btn-outline-secondary toggle-window">−</button>
+    </div>
+    <div class="card-body window-content">
+        {% if recognized_text %}
+        <p>{{ recognized_text }}</p>
+        {% else %}
+        <p class="text-muted">No se ha reconocido texto aún.</p>
+        {% endif %}
+    </div>
+</div>
+
+{% if max_length %}
+<div class="card window-card mt-3">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Clasificador de letras</h5>
+        <button class="btn btn-sm btn-outline-secondary toggle-window">−</button>
+    </div>
+    <div class="card-body window-content">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Pequeña</th>
+                    <th>Mediana</th>
+                    <th>Grande</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in range(max_length) %}
+                <tr>
+                    <td>
+                        {% if i < lista_pequenias|length %} <img src="{{ lista_pequenias[i] }}" class="img-fluid">
+                            {% endif %}
+                    </td>
+                    <td>
+                        {% if i < lista_medianas|length %} <img src="{{ lista_medianas[i] }}" class="img-fluid">
+                            {% endif %}
+                    </td>
+                    <td>
+                        {% if i < lista_grandes|length %} <img src="{{ lista_grandes[i] }}" class="img-fluid">
+                            {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endif %}

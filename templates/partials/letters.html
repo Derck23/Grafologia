@@ -1,0 +1,29 @@
+<div class="card h-100 window-card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Caracteres Segmentados</h5>
+        <button class="btn btn-sm btn-outline-secondary toggle-window">−</button>
+    </div>
+    <div class="card-body window-content">
+        {% if letters %}
+        <form action="/process_corrections" method="POST">
+            <div class="d-flex flex-wrap">
+                {% for letter in letters %}
+                <div class="text-center m-2">
+                    <img src="data:image/png;base64,{{ letter['img_data'] }}" class="img-fluid" alt="Letra recortada">
+                    <input type="text" name="letters[{{ loop.index0 }}]" value="{{ letter['char'] }}"
+                        class="form-control" style="width: 60px;">
+                    <button type="submit" class="btn btn-danger btn-sm mt-2" name="action"
+                        value="remove_{{ letter['path'] }}">Eliminar</button>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="mt-3">
+                <button type="submit" class="btn btn-primary" name="action" value="save">Guardar Correcciones</button>
+                <a href="{{ url_for('download_pdf') }}" class="btn btn-success ms-2">Descargar PDF</a>
+            </div>
+        </form>
+        {% else %}
+        <p class="text-muted">No se han segmentado caracteres aún.</p>
+        {% endif %}
+    </div>
+</div>
